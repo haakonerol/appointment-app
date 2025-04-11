@@ -10,6 +10,8 @@ const Doctors = () => {
   //   console.log(doctorData);
 
   const [show, setShow] = useState(false);
+  const [doctorName, setDoctorName] = useState("");
+
   return (
     <Container>
       <h3 className="display-6 mb-3" style={{ color: "rgb(166, 18, 189)" }}>
@@ -24,7 +26,10 @@ const Doctors = () => {
                 src={img}
                 alt="doctor"
                 className="img-thumbnail doctor-img"
-                onClick={()=> setShow(true)}
+                onClick={() => {
+                  setDoctorName(name);
+                  setShow(true);
+                }}
               />
               <h5>{name}</h5>
               <p>{dep}</p>
@@ -32,7 +37,7 @@ const Doctors = () => {
           );
         })}
       </Row>
-      <AddModal show={show} handleClose={()=>setShow(false)}/>
+      <AddModal show={show} handleClose={() => setShow(false)} doctorName={doctorName} />
     </Container>
   );
 };
