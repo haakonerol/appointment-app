@@ -6,11 +6,19 @@ import { doctorData } from "../helpers/data";
 import AddModal from "./AddModal";
 import { useState } from "react";
 
-const Doctors = () => {
+const Doctors = ({appointments, setAppointments}) => {
   //   console.log(doctorData);
 
   const [show, setShow] = useState(false);
   const [doctorName, setDoctorName] = useState("");
+
+  const addAppointment = (newApp) => {
+   setAppointments([...appointments,newApp])
+   // console.log(appointments)
+
+   //local storage
+   localStorage.setItem("appointments", JSON.stringify([...appointments,newApp]))
+  }
 
   return (
     <Container>
@@ -37,7 +45,7 @@ const Doctors = () => {
           );
         })}
       </Row>
-      <AddModal show={show} handleClose={() => setShow(false)} doctorName={doctorName} />
+      <AddModal show={show} handleClose={() => setShow(false)} doctorName={doctorName} addAppointment={addAppointment} />
     </Container>
   );
 };
